@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+
+.btn-text {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 0;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  color: hsl(0, 85%, 3%);
+}
+
+.btn:hover .btn-text {
+  display: inline-block;
+}
