@@ -3,10 +3,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PageLoginComponent } from './components/pages/page-login/page-login.component';
 import { PageHomeComponent } from './components/pages/page-home/page-home.component';
-
-
-import { PageReturnComponent } from './components/pages/page-return/page-return.component';
-
 import { ManageReaderComponent } from './components/pages/manage-reader/manage-reader.component';
 import { PageListAccAdminComponent } from './components/pages/manage-staff/manage-staff.component';
 
@@ -28,7 +24,6 @@ const routes: Routes = [
   { path: 'page-home', component: PageHomeComponent },
 
   { path: 'manage-request', component: ManageRequestComponent },
-  { path: 'page-return', component: PageReturnComponent },
 
   { path: 'manage-reader', component: ManageReaderComponent },
   { path: 'manage-staff', component: PageListAccAdminComponent },

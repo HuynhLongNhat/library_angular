@@ -13,9 +13,14 @@ export class PageListAccAdminComponent implements OnInit {
   p: number = 1;
   itemsPerPage: number = 8;
   Staff$!: Staff[];
+  isAdmin: Number | null = null;
 
   constructor(private dataService: DataService, private router: Router, private staffService: StaffService) { }
   ngOnInit(): void {
+    const isAdminString = localStorage.getItem('isAdmin');
+    if (isAdminString) {
+      this.isAdmin = Number(isAdminString); // Chuyển đổi sang kiểu Number
+    }
     this.dataService.getAllStaff().subscribe(
       (data: any) => {
         console.log(data.DT)

@@ -13,9 +13,7 @@ import { PageHomeComponent } from './components/pages/page-home/page-home.compon
 import { FormsModule } from '@angular/forms';
 
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { ModalReturnTheBookComponent } from './mods/modal-return-the-book/modal-return-the-book.component';
-import { PageReturnComponent } from './components/pages/page-return/page-return.component';
-
+import { ModalReturnTheBookComponent } from './mods/modal-return-the-book/modal-return-the-book.component'
 import { ManageReaderComponent } from './components/pages/manage-reader/manage-reader.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PageListAccAdminComponent } from './components/pages/manage-staff/manage-staff.component';
@@ -52,7 +50,6 @@ import { PageEditRequestComponent } from './components/pages/manage-request/edit
 
 
     ModalReturnTheBookComponent,
-    PageReturnComponent,
 
     ManageReaderComponent,
     PageListAccAdminComponent,
