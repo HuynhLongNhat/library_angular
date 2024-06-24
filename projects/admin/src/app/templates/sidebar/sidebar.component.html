@@ -1,0 +1,71 @@
+<aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-item">
+            <a class="nav-link " href="page-home">
+                <i class="bi bi-house-door-fill"></i>
+                <span>Trang chủ</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a
+                class="nav-link collapsed"
+                data-bs-target="#tables-nav"
+                data-bs-toggle="collapse"
+                href="#">
+                <div (click)="navigateRequestManage()" class="manage-reader">
+                    <i class="bi bi-people"></i>
+                    <span>Quản lý yêu cầu</span>
+                </div>
+
+            </a>
+
+        </li>
+        <!-- End Forms Nav -->
+
+        <li class="nav-item">
+            <a
+                class="nav-link collapsed"
+                data-bs-target="#tables-nav"
+                data-bs-toggle="collapse"
+                href="#">
+                <div (click)="navigateReaderManage()" class="manage-reader">
+                    <i class="bi bi-people"></i>
+                    <span>Quản lý độc giả</span>
+                </div>
+
+            </a>
+
+        </li>
+        <li class="nav-item">
+            <a
+                class="nav-link collapsed"
+                data-bs-target="#tables-nav"
+                data-bs-toggle="collapse"
+                href="#">
+                <div (click)="navigateStaffManage()" class="manage-staff">
+                    <i class="bi bi-people"></i>
+                    <span>Quản lý nhân viên</span>
+                </div>
+
+            </a>
+
+        </li>
+
+        <li class="nav-item">
+            <a
+                class="nav-link collapsed"
+                data-bs-target="#tables-nav"
+                data-bs-toggle="collapse"
+                href="#">
+                <div (click)="navigateBookManage()" class="manage-staff">
+                    <i class="bi bi-people"></i>
+                    <span>Quản lý sách</span>
+                </div>
+
+            </a>
+
+        </li>
+
+    </ul>
+</aside>

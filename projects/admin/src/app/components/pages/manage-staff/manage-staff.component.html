@@ -1,0 +1,79 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Danh sách nhân viên</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="page-home">Trang chủ</a>
+                </li>
+                <a class="breadcrumb-item">Quản lý người dùng</a>
+                <li class="breadcrumb-item active">Danh sách nhân viên</li>
+            </ol>
+        </nav>
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Danh sách nhân viên</h5>
+                            <div>
+                                <button class="btn btn-primary mb-3"
+                                    (click)="navigationAddNewStaff()">
+                                    Thêm nhân viên mới
+                                </button>
+                            </div>
+                            <table class="table datatable">
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Tên</th>
+                                        <th>Email</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Giới tính</th>
+                                        <th>Quyền hạn</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        *ngFor="let p of Staff$ | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; let i = index">
+                                        <td>{{i + 1}}</td>
+
+                                        <td>{{p.name}}</td>
+                                        <td>{{p.email}}</td>
+                                        <td>{{p.phone}}</td>
+                                        <td>{{p.gender}}</td>
+                                        <td>{{p.admin == 0 ? "Quản trị viên" :
+                                            "Nhân viên"}}</td>
+                                        <td
+                                            class="mt-3">
+
+                                            <button class="btn btn-danger mx-2">
+                                                <i
+                                                    class="bi bi-prescription mx-2"></i>
+                                                <span
+                                                    (click)="deleteStaff(p)">Xóa</span></button>
+
+                                            <button class="btn btn-warning"
+                                                (click)="navigationEditStaff(p)">
+                                                <i
+                                                    class="bi bi-pencil mx-2"></i>
+                                                <span>Cập nhật</span></button>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- End Table with stripped rows -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <pagination-controls
+            class="pagination-controls d-flex justify-content-center"
+            (pageChange)="p = $event"></pagination-controls>
+    </div>
+</main>

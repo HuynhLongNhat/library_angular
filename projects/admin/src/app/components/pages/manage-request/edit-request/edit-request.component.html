@@ -1,0 +1,143 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Cập nhật thông tin yêu cầu</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="page-home">Trang chủ</a>
+                </li>
+                <a class="breadcrumb-item">Quản lý yêu cầu</a>
+                <li class="breadcrumb-item active">Chỉnh sửa yêu cầu</li>
+            </ol>
+        </nav>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Chỉnh sửa yêu cầu mượn
+                    sách</h5>
+
+                <!-- General Form Elements -->
+                <form [formGroup]="editRequestForm"
+                    (ngSubmit)="handleEditRequest()">
+                    <div class="row mb-3">
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="id"
+                            hidden
+                            required />
+
+                        <div class="col">
+                            <label class="col-form-label">
+                                <span style="color: red;">*</span> Tên độc giả
+                            </label>
+                            <select formControlName="readerId"
+                                class="form-control"
+                                required>
+                                <option value>Chọn tên độc giả</option>
+                                <option *ngFor="let reader of readers$"
+                                    [value]="reader.id">
+                                    {{reader.id}} - {{ reader.name }}
+                                </option>
+                            </select>
+                            <div
+                                *ngIf="editRequestForm.get('readerId')?.hasError('required')"
+                                class="text-danger">
+                                Reader name is required.
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <label class="col-form-label">
+                                <span style="color: red;">*</span> Tên sách
+                            </label>
+                            <select formControlName="bookId"
+                                class="form-control"
+                                required>
+                                <option value>Chọn tên sách</option>
+                                <option *ngFor="let book of productBook$"
+                                    [value]="book.id">
+                                    {{ book.name }}
+                                </option>
+                            </select>
+                            <div
+                                *ngIf="editRequestForm.get('bookId')?.hasError('required')"
+                                class="text-danger">
+                                Book name is required.
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label class="col-form-label">
+                                <span style="color: red;">*</span> Ngày mượn
+                            </label>
+                            <input
+                                type="date"
+                                class="form-control"
+                                formControlName="borrowDate"
+                                required />
+                            <div
+                                *ngIf="editRequestForm.get('borrowDate')?.hasError('required')"
+                                class="text-danger">
+                                Borrow date is required.
+                            </div>
+
+                        </div>
+                        <div class="col-6">
+                            <label class="col-form-label">
+                                <span style="color: red;">*</span> Ngày trả
+                            </label>
+                            <input
+                                type="date"
+                                class="form-control"
+                                formControlName="returnDate"
+                                required />
+                            <div
+                                *ngIf="editRequestForm.get('returnDate')?.hasError('required')"
+                                class="text-danger">
+                                Return date is required.
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label class="col-form-label">
+                                <span style="color: red;">*</span> Số lượng
+                            </label>
+                            <input
+                                type="number"
+                                class="form-control"
+                                formControlName="quantity"
+                                required />
+                            <div
+                                *ngIf="editRequestForm.get('quantity')?.hasError('required')"
+                                class="text-danger">
+                                Quantity is required.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-sm-10">
+                            <button type="submit"
+                                class="btn btn-primary"
+                                [disabled]="editRequestForm.invalid">
+                                Thêm mới
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <!-- End General Form Elements -->
+            </div>
+        </div>
+    </div>
+</main>
+<app-footer></app-footer>

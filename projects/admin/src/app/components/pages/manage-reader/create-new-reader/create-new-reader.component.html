@@ -1,0 +1,142 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Thêm nhân viên mới</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="page-home">Trang chủ</a>
+                </li>
+                <a class="breadcrumb-item">Quản lý độc giả</a>
+                <li class="breadcrumb-item active">Thêm độc giả mới</li>
+            </ol>
+        </nav>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Thêm độc giả mới</h5>
+
+                <!-- General Form Elements -->
+                <form [formGroup]="addNewReaderForm"
+                    (ngSubmit)="handleAddNewReader()">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label class="col-form-label">
+                                <span style="color: red;">*</span> Tên độc giả
+                            </label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                formControlName="name"
+                                required />
+                            <div
+                                *ngIf="addNewReaderForm.get('name')?.hasError('required')"
+                                class="text-danger">
+                                Reader name is required.
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label class="col-form-label">
+                                <span style="color: red;">*</span> Số điện thoại
+                            </label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                formControlName="phone"
+                                required />
+                            <div
+                                *ngIf="addNewReaderForm.get('phone')?.hasError('required')"
+                                class="text-danger">
+                                Phone number is required.
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row mb-3">
+
+                        <div class="col">
+                            <label class="col-form-label">
+                                <span style="color: red;">*</span> Email
+                            </label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                formControlName="email"
+                                required />
+                            <div
+                                *ngIf="addNewReaderForm.get('email')?.hasError('required')"
+                                class="text-danger">
+                                Email is required.
+                            </div>
+                            <div
+                                *ngIf="addNewReaderForm.get('email')?.hasError('email')"
+                                class="text-danger">
+                                Please enter a valid email
+                                address.
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label class="col-form-label">
+                                <span style="color: red;">*</span> Address
+                            </label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                formControlName="address"
+                                required />
+                            <div
+                                *ngIf="addNewReaderForm.get('address')?.hasError('required')"
+                                class="text-danger">
+                                Address is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+
+                        <div class="col-6">
+                            <label class="col-form-label">
+                                <span style="color: red;">*</span> Gender
+                            </label>
+                            <select
+                                class="form-control"
+                                formControlName="gender"
+                                required>
+                                <option value>
+                                    Chọn giới tính
+                                </option>
+                                <option value="Nam">
+                                    Nam
+                                </option>
+                                <option value="Nữ">
+                                    Nữ
+                                </option>
+                                <option value="Khác">
+                                    Khác
+                                </option>
+                            </select>
+
+                            <div
+                                *ngIf="addNewReaderForm.get('gender')?.hasError('required')"
+                                class="text-danger">
+                                Gender is required.
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-10">
+                            <button type="submit"
+                                class="btn btn-primary"
+                                [disabled]="addNewReaderForm.invalid">
+                                Thêm mới
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <!-- End General Form Elements -->
+            </div>
+        </div>
+    </div>
+</main>
+<app-footer></app-footer>

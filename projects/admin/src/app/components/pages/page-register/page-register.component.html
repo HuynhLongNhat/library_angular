@@ -1,0 +1,168 @@
+ <main>
+    <div class="container">
+        <section
+            class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div
+                        class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                        <!-- End Logo -->
+
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="pt-4 pb-2">
+                                    <h5
+                                        class="card-title text-center pb-0 fs-4">
+                                        Đăng ký
+                                    </h5>
+
+                                </div>
+
+                                <form
+                                    [formGroup]="registerForm"
+                                    (ngSubmit)="handleRegister()"
+                                    class="row g-3 needs-validation"
+                                    novalidate>
+                                    <div class="col-12">
+                                        <label class="form-label">
+                                            <span style="color: red;">*</span>
+                                            Email
+                                        </label>
+                                        <input
+                                            type="email"
+                                            class="form-control"
+                                            name="email"
+                                            formControlName="email"
+                                            required
+                                            email />
+                                        <div
+                                            *ngIf="registerForm.get('email')?.hasError('required')"
+                                            class="text-danger">
+                                            Email is required.
+                                        </div>
+                                        <div
+                                            *ngIf="registerForm.get('email')?.hasError('email')"
+                                            class="text-danger">
+                                            Please enter a valid email address.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label class="form-label">
+                                            <span style="color: red;">*</span>
+                                            Số điện thoại
+                                        </label>
+                                        <div class="input-group has-validation">
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                name="phonenumber"
+                                                formControlName="phonenumber"
+                                                required />
+                                        </div>
+                                        <div
+                                            *ngIf="registerForm.get('phonenumber')?.hasError('required')"
+                                            class="text-danger">
+                                            Số điện thoại is required.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label class="form-label">
+                                            <span style="color: red;">*</span>
+                                            Họ tên
+                                        </label>
+                                        <div class="input-group has-validation">
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                name="name"
+                                                formControlName="name"
+                                                required />
+                                        </div>
+                                        <div
+                                            *ngIf="registerForm.get('name')?.hasError('required')"
+                                            class="text-danger">
+                                            Họ tên is required.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label class="form-label">
+                                            <span style="color: red;">*</span>
+                                            Mật khẩu
+                                        </label>
+                                        <input
+                                            type="password"
+                                            class="form-control"
+                                            name="password"
+                                            formControlName="password"
+                                            required
+                                            minlength="6" />
+                                        <div
+                                            *ngIf="registerForm.get('password')?.hasError('required')"
+                                            class="text-danger">
+                                            Mật khẩu is required.
+                                        </div>
+                                        <div
+                                            *ngIf="registerForm.get('password')?.hasError('minlength')"
+                                            class="text-danger">
+                                            Mật khẩu must be at least 6
+                                            characters long.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label class="form-label">
+                                            <span
+                                                style="color: red;">*</span>
+                                            Nhập lại mật khẩu
+                                        </label>
+                                        <input
+                                            type="password"
+                                            class="form-control"
+                                            name="repassword"
+                                            formControlName="repassword"
+                                            required
+                                            equalTo="password" />
+                                        <div
+                                            *ngIf="registerForm.get('repassword')?.hasError('required')"
+                                            class="text-danger">
+                                            Nhập lại mật khẩu is required.
+                                        </div>
+                                        <div
+                                            *ngIf="registerForm.get('repassword')?.hasError('equalTo')">
+                                            Mật khẩu do not match.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <button
+                                            class="btn btn-primary w-100"
+                                            type="submit"
+                                            [disabled]="registerForm.invalid">
+                                            Đăng ký
+                                        </button>
+                                    </div>
+
+                                    <div class="text-center mt-5">
+                                        <p>
+                                            Bạn đã có tài khoản:
+                                            <span>
+                                                <a href="/page-login"
+                                                    class="link-primary">Đăng
+                                                    nhập ngay!</a>
+                                            </span>
+                                        </p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>

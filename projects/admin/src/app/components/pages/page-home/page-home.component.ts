@@ -5,7 +5,7 @@ import { ProductBook } from 'projects/admin/src/models/model';
 @Component({
   selector: 'app-page-home',
   templateUrl: "./page-home.component.html",
-  // styleUrl: "./page-home.component.scss"
+  styleUrls: ["./page-home.component.scss"]
 
 })
 export class PageHomeComponent implements OnInit {
