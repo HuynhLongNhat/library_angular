@@ -1,81 +1,104 @@
 <app-header></app-header>
 <app-sidebar></app-sidebar>
 <main id="main" class="main">
-    <div class="pagetitle">
-        <h1>Danh sách độc giả</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="page-home">Trang chủ</a>
-                </li>
-                <a class="breadcrumb-item">Quản lý độc giả</a>
-                <li class="breadcrumb-item active">Danh sách độc giả</li>
-            </ol>
-        </nav>
-        <section class="section">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Danh sách độc giả</h5>
-                            <div>
-                                <button class="btn btn-primary mb-3"
-                                    (click)="navigationAddNewReader()">
-                                    Thêm độc giả mới
-                                </button>
-                            </div>
+  <div class="pagetitle">
+    <h1>Danh sách độc giả</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="page-home">Trang chủ</a>
+        </li>
+        <a class="breadcrumb-item">Quản lý độc giả</a>
+        <li class="breadcrumb-item active">Danh sách độc giả</li>
+      </ol>
+    </nav>
 
-                            <table class="table datatable">
-                                <thead>
-                                    <tr>
-                                        <th>STT</th>
-                                        <th>Họ và tên</th>
-                                        <th>Email</th>
-                                        <th>Địa chỉ</th>
-                                        <th>Số điện thoại</th>
-                                        <th>Giới tính</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr
-                                        *ngFor="let p of readers$ | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; let i = index">
-                                        <td>{{i + 1}}</td>
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Danh sách độc giả</h5>
 
-                                        <td>{{p.name}}</td>
-                                        <td>{{p.email}}</td>
-                                        <td>{{p.address}}</td>
-                                        <td>{{p.phone}}</td>
-                                        <td>{{p.gender}}</td>
+              <div class="search-group">
+                <input
+                  type="text"
+                  name="searchText"
+                  [(ngModel)]="searchText"
+                  placeholder="Tìm kiếm độc giả"
+                  title="Enter search keyword"
+                />
+                <button type="submit" title="Search">
+                  <i class="bi bi-search"></i>
+                </button>
+              </div>
 
-                                        <td
-                                            class="mt-3">
+              <div>
+                <button
+                  class="btn btn-primary mb-3"
+                  (click)="navigationAddNewReader()"
+                >
+                  Thêm độc giả mới
+                </button>
+              </div>
 
-                                            <button class="btn btn-danger mx-2">
-                                                <i
-                                                    class="bi bi-prescription mx-2"></i>
-                                                <span
-                                                    (click)="deleteReader(p)">Xóa</span></button>
+              <table class="table datatable">
+                <thead>
+                  <tr>
+                    <th>STT</th>
+                    <th>Họ và tên</th>
+                    <th>Email</th>
+                    <th>Địa chỉ</th>
+                    <th>Số điện thoại</th>
+                    <th>Giới tính</th>
+                    <th>Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let p of readers$
+                        | filter : searchText
+                        | paginate
+                          : { itemsPerPage: itemsPerPage, currentPage: p };
+                      let i = index
+                    "
+                  >
+                    <td>{{ i + 1 }}</td>
 
-                                            <button class="btn btn-warning"
-                                                (click)="navigationEditReader(p)">
-                                                <i
-                                                    class="bi bi-pencil mx-2"></i>
-                                                <span>Cập nhật</span></button>
+                    <td>{{ p.name }}</td>
+                    <td>{{ p.email }}</td>
+                    <td>{{ p.address }}</td>
+                    <td>{{ p.phone }}</td>
+                    <td>{{ p.gender }}</td>
 
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <!-- End Table with stripped rows -->
-                        </div>
-                    </div>
-                </div>
+                    <td class="mt-3">
+                      <button class="btn btn-danger mx-2">
+                        <i class="bi bi-prescription mx-2"></i>
+                        <span (click)="deleteReader(p)">Xóa</span>
+                      </button>
+
+                      <button
+                        class="btn btn-warning"
+                        (click)="navigationEditReader(p)"
+                      >
+                        <i class="bi bi-pencil mx-2"></i>
+                        <span>Cập nhật</span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- End Table with stripped rows -->
             </div>
-        </section>
-        <pagination-controls
-            class="pagination-controls d-flex justify-content-center"
-            (pageChange)="p = $event"></pagination-controls>
-    </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <pagination-controls
+      class="pagination-controls d-flex justify-content-center"
+      (pageChange)="p = $event"
+    ></pagination-controls>
+  </div>
 </main>
 <app-footer></app-footer>

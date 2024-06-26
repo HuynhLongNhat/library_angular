@@ -1,93 +1,103 @@
 <app-header></app-header>
 <app-sidebar></app-sidebar>
 <main id="main" class="main">
-    <div class="pagetitle">
-        <h1>Danh sách yêu cầu mượn</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="page-home">Trang chủ</a>
-                </li>
-                <a class="breadcrumb-item">Quản lý yêu cầu</a>
-                <li class="breadcrumb-item active">Danh sách yêu cầu mượn</li>
-            </ol>
-        </nav>
-        <section class="section">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card modal-return-the-book">
-                        <div class="card-body">
-                            <h5 class="card-title">Danh sách yêu cầu mượn</h5>
-                            <div>
-                                <button class="btn btn-primary mb-5"
-                                    (click)="navigationAddNewRequest()">
-                                    Tạo yêu cầu mới
-                                </button>
-                            </div>
-                            <!-- Table with stripped rows -->
-                            <table class="table datatable">
-                                <thead>
-                                    <tr>
-                                        <th>STT</th>
-                                        <th>Người mượn</th>
-                                        <th>Tên sách</th>
-                                        <th>Số lượng</th>
-                                        <th>
-                                            Ngày mượn
-                                        </th>
-                                        <th>
-                                            Hạn trả
-                                        </th>
+  <div class="pagetitle">
+    <h1>Danh sách yêu cầu mượn</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="page-home">Trang chủ</a>
+        </li>
+        <a class="breadcrumb-item">Quản lý yêu cầu</a>
+        <li class="breadcrumb-item active">Danh sách yêu cầu mượn</li>
+      </ol>
+    </nav>
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card modal-return-the-book">
+            <div class="card-body">
+              <h5 class="card-title">Danh sách yêu cầu mượn</h5>
+              <div>
+                <button
+                  class="btn btn-primary mb-5"
+                  (click)="navigationAddNewRequest()"
+                >
+                  Tạo yêu cầu mới
+                </button>
+              </div>
 
-                                        <th>Duyệt bởi</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr
-                                        *ngFor="let p of requests$ | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; let i = index">
-                                        <td>{{i + 1}}</td>
+              <div class="search-group2">
+                <input
+                  type="text"
+                  name="searchText"
+                  [(ngModel)]="searchText"
+                  placeholder="Tìm kiếm người yêu cầu "
+                  title="Enter search keyword"
+                />
+                <button type="submit" title="Search">
+                  <i class="bi bi-search"></i>
+                </button>
+              </div>
+              <!-- Table with stripped rows -->
+              <table class="table datatable">
+                <thead>
+                  <tr>
+                    <th>STT</th>
+                    <th>Người mượn</th>
+                    <th>Tên sách</th>
+                    <th>Số lượng</th>
+                    <th>Ngày mượn</th>
+                    <th>Hạn trả</th>
 
-                                        <td>{{p.readerData.name}}</td>
-                                        <td>{{p.bookData.name}}</td>
-                                        <td>{{p.quantity}}</td>
+                    <th>Duyệt bởi</th>
+                    <th>Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let p of requests$
+                        | filter : searchText
+                        | paginate
+                          : { itemsPerPage: itemsPerPage, currentPage: p };
+                      let i = index
+                    "
+                  >
+                    <td>{{ i + 1 }}</td>
 
-                                        <td>{{p.borrowDate}}</td>
-                                        <td>{{p.returnDate}}</td>
-                                        <td>{{p.libraryStaffData.name}}</td>
-                                        <td
-                                            class="mt-3">
+                    <td>{{ p.readerData.name }}</td>
+                    <td>{{ p.bookData.name }}</td>
+                    <td>{{ p.quantity }}</td>
 
-                                            <button
-                                                class="btn btn-primary mx-2">
-                                                <i
-                                                    class="bi bi-prescription mx-2"></i>
-                                                <span
-                                                    (click)="returnBook(p)">Trả
-                                                    sách</span></button>
+                    <td>{{ p.borrowDate }}</td>
+                    <td>{{ p.returnDate }}</td>
+                    <td>{{ p.libraryStaffData.name }}</td>
+                    <td class="mt-3">
+                      <button class="btn btn-primary mx-2">
+                        <i class="bi bi-prescription mx-2"></i>
+                        <span (click)="returnBook(p)">Trả sách</span>
+                      </button>
 
-                                            <button
-                                                class="btn btn-warning mx-2">
-
-                                                <span
-                                                    (click)="navigationEditRequest(p)">Cập
-                                                    nhật
-                                                </span></button>
-
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <!-- End Table with stripped rows -->
-                            <pagination-controls
-                                class="pagination-controls d-flex justify-content-center"
-                                (pageChange)="p = $event"></pagination-controls>
-                        </div>
-                    </div>
-                </div>
+                      <button class="btn btn-warning mx-2">
+                        <span (click)="navigationEditRequest(p)"
+                          >Cập nhật
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- End Table with stripped rows -->
+              <pagination-controls
+                class="pagination-controls d-flex justify-content-center"
+                (pageChange)="p = $event"
+              ></pagination-controls>
             </div>
-        </section>
-
-    </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 </main>
 <app-footer></app-footer>

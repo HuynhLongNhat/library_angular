@@ -4,20 +4,20 @@ import { ProductBook } from 'projects/admin/src/models/model';
 
 @Component({
   selector: 'app-page-home',
-  templateUrl: "./page-home.component.html",
-  styleUrls: ["./page-home.component.scss"]
-
+  templateUrl: './page-home.component.html',
+  styleUrls: ['./page-home.component.scss'],
 })
 export class PageHomeComponent implements OnInit {
+  searchText: any;
   p: number = 1;
   itemsPerPage: number = 8;
   products$!: ProductBook[];
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) {}
   ngOnInit(): void {
     this.dataService.getAllBook().subscribe(
       (data: any) => {
         this.products$ = data.DT;
-        console.log('data', data.DT)
+        console.log('data', data.DT);
       },
       (error) => {
         console.error('Error fetching data: ', error);
