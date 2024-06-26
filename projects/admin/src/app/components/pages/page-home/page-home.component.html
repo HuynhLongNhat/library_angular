@@ -1,63 +1,79 @@
- <app-header></app-header>
+<app-header></app-header>
 <app-sidebar></app-sidebar>
 <main id="main" class="main">
-    <div class="pagetitle">
-        <div class="p-container">
-            <h1>Trang chủ</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="page-home">Trang chủ</a>
-                    </li>
-                    <li class="breadcrumb-item active">Trang chủ</li>
-                </ol>
-            </nav>
+  <div class="pagetitle">
+    <div class="p-container">
+      <h1>Trang chủ</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="page-home">Trang chủ</a>
+          </li>
+          <li class="breadcrumb-item active">Trang chủ</li>
+        </ol>
+      </nav>
+      <div class="search-bar">
+        <form
+          class="search-form d-flex align-items-center"
+          method="POST"
+          action="#"
+        >
+          <input
+            type="text"
+            name="searchText"
+            [(ngModel)]="searchText"
+            placeholder="Tìm kiếm tiêu đề sách (VD: English)"
+            title="Enter search keyword"
+          />
+          <button type="submit" title="Search">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
+      </div>
 
-            <div class="container">
-                <div class="row">
-                    <div
-                        class="col-sm-3"
-                        *ngFor="
+      <div class="container">
+        <div class="row">
+          <div
+            class="col-sm-3"
+            *ngFor="
               let p of products$
+                | filter : searchText
                 | paginate : { itemsPerPage: itemsPerPage, currentPage: p };
               let i = index
-            ">
-                        <div class="card">
-                            <div class="card-image">
-                                <img class="img-responsive"
-                                    src="{{ p.image }}" />
+            "
+          >
+            <div class="card">
+              <div class="card-image">
+                <img class="img-responsive" src="{{ p.image }}" />
+              </div>
 
-                            </div>
-
-                            <div class="card-content card-info">
-                                <p>
-                                    Tác giả: <span class="fw-bold">{{ p.author
-                                        }}</span>
-                                </p>
-                                <p>
-                                    Thể loại: <span class="fw-bold">{{ p.genre
-                                        }}</span>
-                                </p>
-                                <p>
-                                    Năm xuất bản: <span class="fw-bold">{{
-                                        p.publicYear
-                                        }}</span>
-                                </p>
-                                <p>
-                                    Số lượng <span class="fw-bold">{{ p.quantity
-                                        }}</span>
-                                </p>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+              <div class="card-content card-info">
+                <p>
+                  Tên Sách: <span class="fw-bold">{{ p.name }}</span>
+                </p>
+                <p>
+                  Tác giả: <span class="fw-bold">{{ p.author }}</span>
+                </p>
+                <p>
+                  Thể loại: <span class="fw-bold">{{ p.genre }}</span>
+                </p>
+                <p>
+                  Năm xuất bản: <span class="fw-bold">{{ p.publicYear }}</span>
+                </p>
+                <p>
+                  Số lượng <span class="fw-bold">{{ p.quantity }}</span>
+                </p>
+              </div>
             </div>
+          </div>
         </div>
-
-        <pagination-controls
-            class="pagination-controls"
-            (pageChange)="p = $event"></pagination-controls>
+      </div>
     </div>
+
+    <pagination-controls
+      class="pagination-controls"
+      (pageChange)="p = $event"
+    ></pagination-controls>
+  </div>
 </main>
 <app-footer></app-footer>

@@ -24,19 +24,6 @@
                 Thêm sách mới
               </button>
 
-              <div class="search-group3">
-                <input
-                  type="text"
-                  name="searchText"
-                  [(ngModel)]="searchText"
-                  placeholder="Tìm kiếm người yêu cầu "
-                  title="Enter search keyword"
-                />
-                <button type="submit" title="Search">
-                  <i class="bi bi-search"></i>
-                </button>
-              </div>
-
               <!-- Table with stripped rows -->
               <table class="table datatable">
                 <thead>
@@ -55,7 +42,7 @@
                 </thead>
                 <tbody>
                   <tr
-                    *ngFor="let p of products$ | filter: searchText | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; let i = index"
+                    *ngFor="let p of products$ |  paginate: { itemsPerPage: itemsPerPage, currentPage: p }; let i = index"
                   >
                     <td>{{i + 1}}</td>
                     <td>

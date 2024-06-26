@@ -6,30 +6,31 @@ import { RequestService } from 'projects/admin/src/service/Request.service';
 @Component({
   selector: 'app-page-borrow',
   templateUrl: './manage-request.component.html',
-  styleUrls: ["./manage-request.component.scss"]
+  styleUrls: ['./manage-request.component.scss'],
 })
 export class ManageRequestComponent implements OnInit {
-
+  searchText: any;
   p: number = 1;
   itemsPerPage: number = 8;
   requests$!: Request[];
-  constructor(private dataService: DataService, private router: Router, private requestService: RequestService) { }
+  constructor(
+    private dataService: DataService,
+    private router: Router,
+    private requestService: RequestService
+  ) {}
   ngOnInit(): void {
     this.dataService.getAllRequest().subscribe(
       (data: any) => {
-
         this.requests$ = data.DT;
       },
       (error) => {
         console.error('Error fetching data: ', error);
       }
     );
-
   }
 
-
   navigationAddNewRequest() {
-    this.router.navigate(['create-new-request'])
+    this.router.navigate(['create-new-request']);
   }
 
   navigationEditRequest(request: any) {
@@ -37,35 +38,30 @@ export class ManageRequestComponent implements OnInit {
     this.router.navigate(['/edit-request']);
   }
 
-
   returnBook(request: any) {
     if (confirm(`Bạn có chắc chắn muốn trả sách  không ?`)) {
-      this.dataService.returnBook(request.id)
-        .subscribe((response: any) => {
+      this.dataService.returnBook(request.id).subscribe(
+        (response: any) => {
           if (response.EC === 0) {
             alert(response.EM);
             this.dataService.getAllRequest().subscribe(
               (data: any) => {
                 this.requests$ = data.DT;
-
               },
               (error) => {
                 console.error('Error fetching data: ', error);
               }
             );
           }
-
-        }, error => {
+        },
+        (error) => {
           alert('Đã xảy ra lỗi');
-
-        });
+        }
+      );
     }
-
   }
 
   onItemsPerPageChange(event: any) {
     this.itemsPerPage = Number((event.target as HTMLSelectElement)?.value);
   }
-
-
 }

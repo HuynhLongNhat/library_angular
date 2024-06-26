@@ -32,6 +32,20 @@ import { Router } from '@angular/router';
                   >
                     Thêm sách mới
                   </button>
+
+                  <div class="search-group3">
+                    <input
+                      type="text"
+                      name="searchText"
+                      [(ngModel)]="searchText"
+                      placeholder="Tìm kiếm người yêu cầu "
+                      title="Enter search keyword"
+                    />
+                    <button type="submit" title="Search">
+                      <i class="bi bi-search"></i>
+                    </button>
+                  </div>
+
                   <!-- Table with stripped rows -->
                   <table class="table datatable">
                     <thead>
@@ -52,6 +66,7 @@ import { Router } from '@angular/router';
                       <tr
                         *ngFor="
                           let p of products$
+                            | filter : searchText
                             | paginate
                               : { itemsPerPage: itemsPerPage, currentPage: p };
                           let i = index
