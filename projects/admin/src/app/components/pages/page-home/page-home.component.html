@@ -20,7 +20,8 @@
         >
           <input
             type="text"
-            name="query"
+            name="searchText"
+            [(ngModel)]="searchText"
             placeholder="Tìm kiếm tiêu đề sách (VD: English)"
             title="Enter search keyword"
           />
@@ -35,7 +36,8 @@
           <div
             class="col-sm-3"
             *ngFor="
-              let p of products$ | filter: searchText
+              let p of products$
+                | filter : searchText
                 | paginate : { itemsPerPage: itemsPerPage, currentPage: p };
               let i = index
             "
