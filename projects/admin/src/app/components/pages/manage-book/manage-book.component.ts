@@ -18,7 +18,6 @@ import { Router } from '@angular/router';
               <a href="page-home">Trang chủ</a>
             </li>
             <a class="breadcrumb-item">Quản lý sách</a>
-          
           </ol>
         </nav>
         <section class="section">
@@ -27,19 +26,22 @@ import { Router } from '@angular/router';
               <div class="card modal-return-the-book">
                 <div class="card-body">
                   <h5 class="card-title">Danh sách sách</h5>
-                <button class="btn btn-primary mb-3" (click)="navigationPageAddNewBook()">
-                  Thêm sách mới
-                </button>
+                  <button
+                    class="btn btn-primary mb-3"
+                    (click)="navigationPageAddNewBook()"
+                  >
+                    Thêm sách mới
+                  </button>
                   <!-- Table with stripped rows -->
                   <table class="table datatable">
                     <thead>
                       <tr>
                         <th>STT</th>
-                      
+
                         <th>Hình ảnh</th>
                         <th>Tên sách</th>
                         <th>Tác giả</th>
-                       
+
                         <th>Thể loại</th>
                         <th>Năm xuất bản</th>
                         <th>Số lượng</th>
@@ -47,31 +49,43 @@ import { Router } from '@angular/router';
                       </tr>
                     </thead>
                     <tbody>
-                     
-                    <tr *ngFor="let p of products$ | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; let i = index">
-                    <td>{{i + 1}}</td>
+                      <tr
+                        *ngFor="
+                          let p of products$
+                            | paginate
+                              : { itemsPerPage: itemsPerPage, currentPage: p };
+                          let i = index
+                        "
+                      >
+                        <td>{{ i + 1 }}</td>
                         <td>
-                        <img src="{{p.image}}" width="100" height="100" style="border-radius: 5px;" />
+                          <img
+                            src="{{ p.image }}"
+                            width="100"
+                            height="100"
+                            style="border-radius: 5px;"
+                          />
                         </td>
-                              <td>{{p.name}}</td>
-                              <td>{{p.author}}</td>
-                              <td>{{p.genre}}</td>
-                              <td>{{p.publicYear}}</td>
-                              <td>{{p.quantity}}</td>
-                        <td
-                          class="mt-3"
-                        >
-                          
-                          <button class="btn btn-danger mx-2">  <i class="bi bi-prescription mx-2"></i>
-                          <span  (click)="deleteABook(p)">Xóa</span></button>
-                       
-                           <button class="btn btn-warning " (click)="navigationPageEditBook(p)">  <i class="bi bi-pencil mx-2"></i>
-                           <span >Cập nhật</span></button>
-                          
-                        </td>
-                       </tr>
+                        <td>{{ p.name }}</td>
+                        <td>{{ p.author }}</td>
+                        <td>{{ p.genre }}</td>
+                        <td>{{ p.publicYear }}</td>
+                        <td>{{ p.quantity }}</td>
+                        <td class="mt-3">
+                          <button class="btn btn-danger mx-2">
+                            <i class="bi bi-prescription mx-2"></i>
+                            <span (click)="deleteABook(p)">Xóa</span>
+                          </button>
 
-                
+                          <button
+                            class="btn btn-warning "
+                            (click)="navigationPageEditBook(p)"
+                          >
+                            <i class="bi bi-pencil mx-2"></i>
+                            <span>Cập nhật</span>
+                          </button>
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                   <!-- End Table with stripped rows -->
@@ -81,24 +95,29 @@ import { Router } from '@angular/router';
           </div>
         </section>
         <pagination-controls
-            class="pagination-controls d-flex justify-content-center"
-            (pageChange)="p = $event"></pagination-controls>
+          class="pagination-controls d-flex justify-content-center"
+          (pageChange)="p = $event"
+        ></pagination-controls>
       </div>
     </main>
     <app-footer></app-footer>
   `,
-  styleUrls: ["./manage-book.component.scss"]
+  styleUrls: ['./manage-book.component.scss'],
 })
 export class ManageBookComponent implements OnInit {
+  searchText: any;
   p: number = 1;
   itemsPerPage: number = 8;
   products$!: ProductBook[];
-  constructor(private dataService: DataService, private router: Router, private bookService: BookService) { }
+  constructor(
+    private dataService: DataService,
+    private router: Router,
+    private bookService: BookService
+  ) {}
   ngOnInit(): void {
     this.dataService.getAllBook().subscribe(
       (data: any) => {
         this.products$ = data.DT;
-
       },
       (error) => {
         console.error('Error fetching data: ', error);
@@ -111,7 +130,6 @@ export class ManageBookComponent implements OnInit {
   }
 
   navigationPageAddNewBook() {
-
     this.router.navigate(['/page-add-new-book']);
   }
 
@@ -122,16 +140,14 @@ export class ManageBookComponent implements OnInit {
 
   // Hàm để xóa sách
   deleteABook(book: any) {
-
     if (confirm(`Bạn có chắc chắn muốn xóa sách : ${book.name} không ?`)) {
-      this.dataService.destroyBook(book.id)
-        .subscribe((response: any) => {
+      this.dataService.destroyBook(book.id).subscribe(
+        (response: any) => {
           if (response.EC === 0) {
             alert(response.EM);
             this.dataService.getAllBook().subscribe(
               (data: any) => {
                 this.products$ = data.DT;
-
               },
               (error) => {
                 console.error('Error fetching data: ', error);
@@ -139,13 +155,12 @@ export class ManageBookComponent implements OnInit {
             );
           }
           // Xử lý phản hồi thành công (ví dụ: điều hướng đến danh sách sách)
-        }, error => {
+        },
+        (error) => {
           alert('Đã xảy ra lỗi');
           // Xử lý lỗi xóa (ví dụ: hiển thị thông báo lỗi)
-        });
+        }
+      );
     }
   }
-
-
 }
-

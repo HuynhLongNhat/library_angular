@@ -126,6 +126,58 @@ label {
 .search-container {
     flex: 1;
 }
+.container {
+    display: flex;
+    justify-content: flex-start; 
+    padding: 20px; 
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+.search-form input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    font-size: 16px;
+    outline: none;
+    width: 300px; 
+    transition: all 0.3s ease; 
+}
+
+.search-form input[type="text"]:hover {
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); 
+    transform: scale(1.05); 
+}
+
+.search-form button {
+    padding: 10px;
+    background-color: #007bff; 
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease; 
+}
+
+.search-form button:hover {
+    background-color: #0056b3; 
+}
+
+.search-form button i {
+    color: #fff; 
+    font-size: 20px; 
+}
+
 
 .datatable-selector {
     margin-right: 10px;

@@ -42,14 +42,13 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { PageEditRequestComponent } from './components/pages/manage-request/edit-request/edit-request.component';
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageLoginComponent,
     PageHomeComponent,
-
 
     ModalReturnTheBookComponent,
     PageReturnComponent,
@@ -74,8 +73,7 @@ import { PageEditRequestComponent } from './components/pages/manage-request/edit
     PageEditReaderComponent,
     ManageRequestComponent,
     PageCreateNewRequest,
-    PageEditRequestComponent
-
+    PageEditRequestComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,9 +89,9 @@ import { PageEditRequestComponent } from './components/pages/manage-request/edit
     MatNativeDateModule,
     MatFormFieldModule,
     MatInputModule,
-
+    Ng2SearchPipeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
